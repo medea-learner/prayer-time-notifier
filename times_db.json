@@ -1,0 +1,20 @@
+{
+    "city": "Bordj Ghdir",
+    "date": "Mon,26 Dec 2022",
+    "today": {
+        "Fajr": "06:19",
+        "Sunrise": "07:51",
+        "Dhuhr": "12:43",
+        "Asr": "15:17",
+        "Maghrib": "17:37",
+        "Isha'a": "19:01"
+    },
+    "tomorrow": {
+        "Fajr": "06:20",
+        "Sunrise": "07:52",
+        "Dhuhr": "12:43",
+        "Asr": "15:17",
+        "Maghrib": "17:38",
+        "Isha'a": "19:02"
+    }
+}

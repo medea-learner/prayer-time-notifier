@@ -1,0 +1,4 @@
+venv/
+times_db.json
+.idea/
+.vscode/
