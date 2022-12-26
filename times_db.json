@@ -1,20 +1,20 @@
 {
-    "city": "Bordj Ghdir",
+    "city": "Algiers",
     "date": "Mon,26 Dec 2022",
     "today": {
-        "Fajr": "06:19",
-        "Sunrise": "07:51",
-        "Dhuhr": "12:43",
-        "Asr": "15:17",
-        "Maghrib": "17:37",
-        "Isha'a": "19:01"
+        "Fajr": "06:26",
+        "Sunrise": "07:59",
+        "Dhuhr": "12:49",
+        "Asr": "15:21",
+        "Maghrib": "17:41",
+        "Isha'a": "19:06"
     },
     "tomorrow": {
-        "Fajr": "06:20",
-        "Sunrise": "07:52",
-        "Dhuhr": "12:43",
-        "Asr": "15:17",
-        "Maghrib": "17:38",
-        "Isha'a": "19:02"
+        "Fajr": "06:27",
+        "Sunrise": "08:00",
+        "Dhuhr": "12:49",
+        "Asr": "15:21",
+        "Maghrib": "17:42",
+        "Isha'a": "19:07"
     }
 }

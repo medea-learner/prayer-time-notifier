@@ -25,7 +25,7 @@ times = {
 }
 
 DB_NAME = "times_db.json"
-CITY = "bordj ghdir"
+CITY = "algiers"
 API_URL = f"https://dailyprayer.abdulrcs.repl.co/api/{CITY}"
 
 # Update times in db from https://dailyprayer.abdulrcs.repl.co/api
