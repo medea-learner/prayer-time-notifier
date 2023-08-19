@@ -3,10 +3,10 @@ Section: python
 Priority: extra
 Maintainer: Mohamed <mohamed.ea.der@outlook.com>
 Build-Depends: debhelper (>= 9), python3.7, dh-virtualenv (>= 0.8)
-Standards-Version: 0.1
+Standards-Version: 3.9.5
 Homepage: https://github.com/medea-learner/prayer-time-notifier
 
-Package: myhttp
+Package: Prayer Time Notifier
 Architecture: any
 Pre-Depends: dpkg (>= 1.16.1), python3.7, ${misc:Pre-Depends}
 Depends: ${misc:Depends}

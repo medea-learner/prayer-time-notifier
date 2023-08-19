@@ -1,4 +1,7 @@
 import json
+import os.path
+
+import pygame
 import requests
 import schedule
 import subprocess
@@ -25,7 +28,7 @@ times = {
 }
 
 DB_NAME = "times_db.json"
-CITY = "algiers"
+CITY = "bordj ghdir"
 API_URL = f"https://dailyprayer.abdulrcs.repl.co/api/{CITY}"
 
 # Update times in db from https://dailyprayer.abdulrcs.repl.co/api
@@ -37,22 +40,40 @@ if response.status_code == 200:
 else:
 	print("Warning: db not updated")
 
+
 # Get time from db
 times_in_db = json.load(open(DB_NAME, 'r'))
+
+
+# Init pygame mixer
+pygame.mixer.init()
+
 
 def sendmessage(message="Go to pray"):
 	subprocess.Popen(['notify-send', message])
 	return
 
+
 def notify_user(data):
-	sendmessage(f"Go to pray {time}")
+	current_time = data["time"]
+	sendmessage(f"Go to pray {current_time}")
 	default_font = QFont()
 	current_time_font = QFont()
 	current_time_font.setBold(True)
 	data["times"][data["times"]["current_time"]]["widget"].setFont(default_font)
 	data["times"][data["time"]]["widget"].setFont(current_time_font)
-	data["times"]["current_time"] = time
-	
+	data["times"]["current_time"] = current_time
+
+	adan_path = f"adan/{current_time}.mp3"
+	if not os.path.exists(adan_path):
+		adan_path = "/home/mohamed/workspaces/workspace-advancedpython/prayer-time-notifier/adan/default.mp3"
+	pygame.mixer.music.load(adan_path)
+	pygame.mixer.music.play(loops=0)
+
+
+def on_azan_time_click(event):
+	pygame.mixer.music.stop()
+
 
 # Update times var
 now = datetime.now()
@@ -75,11 +96,13 @@ for (time1, time2) in zip(keys[:-2], keys[1:-1]):
 if times["current_time"] is None:
 	times["current_time"] = "Isha'a"
 
+
 class SchudulerThread(QThread):
 	def run(self, *args, **kwargs):
 		while 1: 
 			tm.sleep(40)
 			schedule.run_pending()
+
 
 scheduler = SchudulerThread()
 
@@ -92,32 +115,30 @@ def create_app():
 
 	window.setWindowTitle("Prayer Times")
 
-
 	layout = QFormLayout()
 	
 	current_time_font = QFont()
 	current_time_font.setBold(True)
 
-	for time, data in list(times.items())[:-1]:	
+	for adan_time, data in list(times.items())[:-1]:
 		widget = QLineEdit()
 		widget.setAlignment(Qt.AlignmentFlag.AlignCenter)
 		widget.setText(data['time'])
 		widget.setReadOnly(True)
-		data['widget'] = widget	
-		layout.addRow(time, widget)
-		
+		widget.mousePressEvent = on_azan_time_click
+		data['widget'] = widget
+		layout.addRow(adan_time, widget)
+
 	times[times["current_time"]]["widget"].setFont(current_time_font)
 
 	window.setLayout(layout)
 
-
 	window.show()
-	
+
 	scheduler.start()
 
 	sys.exit(app.exec())
 
+
 if __name__ == "__main__":
 	create_app()
-	
-
